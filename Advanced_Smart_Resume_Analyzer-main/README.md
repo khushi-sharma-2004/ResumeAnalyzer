@@ -1,6 +1,6 @@
-##  Link (Check Outputs in my LinkedIn)
 
-🔗 [LinkedIn Profile](https://www.linkedin.com/feed/update/urn:li:activity:7354553476820951041/)  
+
+ 
 
 #  Smart Resume Analyzer (Spring Boot + MySQL + Thymeleaf)
 
@@ -282,4 +282,4 @@ resume-analyzer/
                     └── ResumeAnalyzerApplicationTests.java
 
 
- Developed & maintained by: Pittu Vaishnavi
+ 
