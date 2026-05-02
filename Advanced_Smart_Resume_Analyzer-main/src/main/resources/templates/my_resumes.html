@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Resumes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">📁 My Resume Upload History</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Skills</th>
+                <th>Uploaded At</th>
+                <th>Actions</th> <!-- ✅ Added this -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="resume : ${resumes}">
+                <td th:text="${resume.id}">1</td>
+                <td th:text="${resume.name}">John Doe</td>
+                <td th:text="${resume.email}">john@example.com</td>
+                <td th:text="${resume.skillsText}">Java, SQL</td>
+                <td th:text="${#temporals.format(resume.uploadedAt, 'yyyy-MM-dd HH:mm')}">2025-07-15 11:30</td>
+                <td>
+                    <a th:href="@{'/my-feedback/' + ${resume.id}}" class="btn btn-sm btn-outline-success">View Feedback</a>
+                    <a th:href="@{'/match/' + ${resume.id} + '/1'}" class="btn btn-sm btn-outline-info">Quick Compare</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="/admin/dashboard">← Back to Dashboard</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Feedback</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4"> Resume Feedback Results</h2>
+
+    <!-- Show New Feedback if available -->
+    <div th:if="${result != null}" class="mb-4 p-4 border rounded shadow-sm bg-light">
+        <h4 class="mb-3 text-primary"> New Feedback</h4>
+        <p><strong>Matched Skills:</strong> <span th:text="${result.matchedSkills}">Java</span></p>
+        <p><strong>Missing Skills:</strong> <span th:text="${result.missingSkills}">Spring Boot</span></p>
+        <p><strong>Match Score:</strong> <span th:text="${result.score + '%'}">80%</span></p>
+        <p><strong>Feedback:</strong> <span th:text="${result.feedback}">Great match!</span></p>
+    </div>
+
+    <!-- Show All Saved Feedback -->
+    <div th:if="${feedbackList != null and !feedbackList.isEmpty()}">
+        <h4 class="mb-3 text-success"> Previous Feedback Records</h4>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Resume ID</th>
+                    <th>Job ID</th>
+                    <th>Score</th>
+                    <th>Feedback</th>
+                    <th>Matched Skills</th>
+                    <th>Missing Skills</th>
+                    <th>Download</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="data : ${feedbackList}">
+                    <td th:text="${data.resumeId}">30</td>
+                    <td th:text="${data.jobId}">1</td>
+                    <td th:text="${data.score + '%'}">80%</td>
+                    <td th:text="${data.feedback}">Excellent match!</td>
+                    <td th:text="${#lists.isEmpty(data.matchedSkills) ? 'None' : data.matchedSkills}">Java, SQL</td>
+                    <td th:text="${#lists.isEmpty(data.missingSkills) ? 'None' : data.missingSkills}">Spring Boot</td>
+                    <td>
+                        <a th:href="@{'/feedback/download/' + ${data.id}}" class="btn btn-sm btn-outline-primary">Download PDF</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a href="/admin/dashboard" class="btn btn-primary">← Go To Dashboard</a>
+</div>
+</body>
+</html>
